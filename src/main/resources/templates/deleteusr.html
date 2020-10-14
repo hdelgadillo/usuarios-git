@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="/Img/icono.ico"/>
+    <title>Menú Administrativo de Usuarios</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<style>
+.btn-lg,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+
+}
+.btn-success{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+left: 50px;
+ top: 50px;
+}
+img{
+	position:relative;
+	left:25px;
+}
+h1,h2{
+	font-family: Century Gothic;
+	color: purple;
+}
+.panel-primary > .panel-heading{
+background-color: #B8A9D0;
+border-color: #B8A9D0;
+}
+
+ tr:nth-child(even) {background-color: #f2f2f2}
+</style>
+</head>
+<br></br>
+<br></br>
+<h1 style="text-align: center;"><img src="/Img/Sysminigletter.png" height="15%" width="15%" align="left"/>Administración de Usuarios</h1>
+<br></br>
+<h2 style="text-align: center;">Eliminar Usuario</h2>
+
+<br></br>
+<br></br>
+<br></br>
+<body>
+<!-- <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1><img src="/Img/SVS.jpg" width="250px"/><font size="7" color="purple">Eliminar Usuario</font></h1>
+        </div>
+    </div>-->
+    <form method="GET" th:action="@{/up/deleteUsuario}">
+    	<table style="margin: 0 auto;">
+    		<tr> 
+	    		<td><label>Ingrese nombre de usuario que desea eliminar:</label></td>
+	    	</tr>
+	    	<tr>
+				<td><input type="text" name="usuario" class="form-control" placeholder="Eliminar"  maxlength="20" size="12"/></td>
+				<td><button name="Eliminar Usuario" id="Delete" class="btn btn-primary">Eliminar Usuario</button></td>
+			</tr>
+		</table>
+	</form> 
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+ <a th:href="@{/}" class="btn btn-success" role="button" id="back">REGRESAR AL MENÚ</a>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="Img/icono.ico"/>
+    <title>Consulta Componentes</title>
+     
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css"/>-->
+<style>
+.btn-lg,
+.btn-primary:hover,
+.btn-success:hover,
+.btn-success:active{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+img{
+	position:relative;
+	left:25px;
+}
+span{
+	font-family: Century Gothic;
+	font-color:purple;
+}
+label{
+	font-family: Century Gothic;
+	font-color:purple;
+	font-size:12x;
+}
+.btn-primary{
+   color:none;
+}
+th{
+	font-family: "Times New Roman", Times, serif;
+	font-style: normal;
+	font-size: 30px;
+}
+.glyphicon {
+    font-size: 30px;
+}
+.glyphicon-user{
+	color:  purple;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+	 font-size: 30px;
+	 left:25px;
+}
+.glyphicon-refresh{
+	 left:955px;
+	 size:20px;
+}
+.glyphicon-search{
+left:620px;
+psoition:absolute;
+}
+.glyphicon-log-out{
+left:1110px;
+position:relative;
+}
+.btn-default > .btn-lg
+{
+	left:955px;
+}
+h1{
+  color: purple;
+  font-family:Century Gothic;
+}
+h2{
+	font-family: Century Gothic;
+	color:purple;
+}
+p{
+   font-family: Century Gothic;
+   color:purple;
+   font-size:20px;
+   left:-200px;
+   position:relative;
+}
+td{
+   font-family: Century Gothic;
+   color:purple;
+   font-size:20px;
+   left:-95px;
+   position:relative;
+}
+</style>
+</head>
+<img src="Img/Sysminigletter.png" height="15%" width="15%" align="left"/>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<h1 style="text-align: center;">Consulta de Documentación Técnica</h1>
+<table id="info" align="right">
+   <tr>
+      <td>Usuario:</td>
+      <td th:text="${username}"></td>
+      </tr>
+</table>
+<br></br>
+<br></br>
+<!-- Salida de la Aplicacion -->
+<form th:action="@{/logout}" method="post" title="Logout">
+	<button class="glyphicon glyphicon-log-out" STYLE="color: purple; font-size: 18pt" type="submit">
+    </button>
+</form>
+		<!-- Admón de Usuarios -->
+<div>
+    <a align="left" href="/Docauto/menusr/menu" class="glyphicon glyphicon-user" role="button" title="Administrar Usuarios"></a>
+</div>
+<br></br>
+<br></br>
+<h2 style="text-align: center;">Selección del Componente</h2>
+<br></br>
+<body>
+		<!-- Tabla de Filtrado -->	
+<form id="consulta" action="/cmps/filtro">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+        <table id="myTable" class="tablesorter">
+        	<tr><input type="text" class="form-control" name="componente" placeholder="Nombre de Componente"/></tr>
+        	<tr>Plataforma:</tr><select id ="plataformas" name="plataformaID" class="form-control"> 
+                <option value=''>--</option>
+                <option th:each="plataforma : ${plataformas}" 
+                    th:text="${plataforma.plataformaId}" required="">
+                </option>
+	        </select>
+            <tr>Sistema:</tr><select id = "sistemas" name="sistemaID" class="form-control">
+                <option value="">--</option>
+                <option th:each="sistema : ${sistemas}" 
+                    th:text="${sistema.sistemaId}">
+                </option>
+            </select>
+            <tr>Clase:</tr><select id = "clases" name="claseId" class="form-control">
+                <option value="">--</option>
+                <option th:each="clase : ${clases}" 
+                    th:text="${clase.claseId}">
+                </option>
+            </select>
+            <tr> Biblioteca:</tr><select id = "bibliotecas" name="bibliotecaId" class="form-control">
+                <option value="">--</option>
+                <option th:each="biblioteca : ${bibliotecas}" 
+                    th:text="${biblioteca.bibliotecaId}">
+                </option>
+            </select>
+            	<button id="search" name="search" title="Buscar Componentes" class="glyphicon glyphicon-search"></button>
+            </table>
+        </div>        
+    </div>
+</form>
+
+				<!-- Lógica de los Filtros -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var $plataformas = $('#plataformas');
+        var $sistemas = $('#sistemas');
+        var $bibliotecas = $('#bibliotecas');
+        var $clases = $('#clases');
+
+        // Estos serán los valores que sean seleccionados por el usuario
+        var sistemaId;
+        var plataformaId;
+        var claseId;
+        var bibliotecaId;
+        
+        $sistemas.on('change', function() {
+            console.log('filtrando');
+            sistemaId = $sistemas.val(); // obtenemos la sistema seleccionada
+            submitRequest();
+        });
+
+        $plataformas.on('change', function() {
+            console.log('filtrando');
+            plataformaId = $plataformas.val(); // obtenemos la plataforma seleccionada
+            submitRequest();
+        });
+
+        $bibliotecas.on('change', function() {
+            console.log('filtrando');
+            bibliotecaId = $bibliotecas.val(); // obtenemos la biblioteca seleccionada
+            submitRequest();
+        });
+
+        $clases.on('change', function() {
+            console.log('filtrando');
+            claseId = $clases.val(); // obtenemos la clase seleccionada
+            submitRequest();
+        });
+
+        function submitRequest() {
+            var data = {
+                "sistemaId": sistemaId,
+                "plataformaId": plataformaId,
+                "claseId": claseId,
+                "bibliotecaId": bibliotecaId
+            };
+            $.ajax('Docauto/filterBy/', {
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            }).done(function(filters) {
+                updateFilters(filters);
+            }).error(function(error){
+                console.error(error);
+            });
+        }
+        
+        function updateFilters(filters) {
+            // Pone todos los selects iguales
+            var defaultOption = '<option val=""></option>';
+            $plataformas.html(defaultOption);
+            $sistemas.html(defaultOption);
+            $bibliotecas.html(defaultOption);
+            $clases.html(defaultOption);
+
+            // poblar los selects
+            var plataformas = [];
+            var sistemas = [];
+            var bibliotecas = [];
+            var clases = [];
+            for(var i = 0; i < filters.length; i++) {
+            	var current = filters[i];
+                if(plataformas.indexOf(current.plataformaId) === -1) {
+                    plataformas.push(current.plataformaId);
+                    $plataformas.append('<option val="'+ current.plataformaId +'">'+  current.plataformaId +'</option>');
+                }
+
+                if(sistemas.indexOf(current.sistemaId) === -1) {
+                    sistemas.push(current.sistemaId);
+                    $sistemas.append('<option val="'+ current.sistemaId +'">'+  current.sistemaId +'</option>');
+                }
+
+                if(bibliotecas.indexOf(current.bibliotecaId) === -1) {
+                    bibliotecas.push(current.bibliotecaId);
+                    $bibliotecas.append('<option val="'+ current.bibliotecaId +'">'+  current.bibliotecaId +'</option>');
+                }
+
+                if(clases.indexOf(current.claseId) === -1) {
+                    clases.push(current.claseId);
+                    $clases.append('<option val="'+ current.claseId +'">'+  current.claseId +'</option>');
+                }
+            }
+            // Dejar los valores seleccionados anteriormente
+            $plataformas.val(plataformaId);
+            $sistemas.val(sistemaId);
+            $bibliotecas.val(bibliotecaId);
+            $clases.val(claseId);
+            
+        }
+        /*]]>*/
+        </script>
+</body>
+</html>

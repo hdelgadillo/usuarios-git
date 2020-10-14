@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="/Img/icono.ico"/>
+    <title>Alta de Usuario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
+	
+	
+<style>
+.btn-lg,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+
+}
+.btn-success{
+	background-color: purple;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+left: 50px;
+ top: 50px;
+}
+img{
+	position:relative;
+	left:25px;
+}
+
+ tr:nth-child(even) {background-color: #f2f2f2}
+ table th {
+  text-align: center;
+  font-family:Arial;
+  font-size:13;
+}
+
+table { 
+	border-spacing: 25px;
+	text-align:center; 
+} 
+h1,h2{
+ 	color:purple;
+ 	font-family:Century Gothic;
+}
+</style>
+</head> 
+<h1 style="text-align: center;"><img src="/Img/Sysminigletter.png" height="15%" width="15%" align="left"/>Administración de Usuarios</h1>
+<br></br>
+<br></br>
+<h2 style="text-align: center;">Usuarios Registrados</h2>
+<br></br>
+<br></br>
+<br></br>
+<body>
+<br></br>
+
+<form th:action="@{/up/getusr}" th:object="${usuarios}" method="GET">
+    <div class="listBlock">
+	<!--<button id="search" name="search" class="btn btn-primary">Ver Usuarios Registrados</button>		
+        		 tABLA que arroja usuarios registrados -->
+   
+      <div class="results-block" id="results-Block">
+        <table style="margin: 0 auto;" id="tablares" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Usuario</th>	
+					<th>Nombre</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>E-Mail</th>	
+                </tr>
+            </thead>
+            <tbody>
+				<tr th:each="userpropio : ${UsuarioPropio}">
+					<td th:text="${userpropio.usuario}">Usuario</td>
+					<td th:text="${userpropio.nombreusr}">Nombre</td>
+                    <td th:text="${userpropio.apellidopat}">Apellido Pateno</td>
+                    <td th:text="${userpropio.apellidomat}">Apellido Materno</td>
+                    <td th:text="${userpropio.correo}">Correo</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+    </div>
+</form> 
+<br></br>
+<a th:href="@{/}" class="btn btn-success" role="button">REGRESAR AL MENÚ</a>
+</body>
+</html>

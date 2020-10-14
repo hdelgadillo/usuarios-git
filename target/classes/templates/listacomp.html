@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="/Docauto/Img/icono.ico"/>
+    <title>Lista de Componentes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="shortcut icon" href="Img/icono.ico"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
+	<script src="//code.jquery.com/jquery-1.12.3.js"></script>
+	<script src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></script>
+<style>	
+.btn-lg,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+
+}
+.btn-success{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+left: 50px;
+ top: 50px;
+}
+img{
+	position:relative;
+	margin:20px;
+}
+h1,h2{
+	font-family: "Century Gothic", Times, serif;
+	font-style: normal;
+	color: purple
+}
+.glyphicon {
+    font-size: 20px;
+    color:  purple;
+}
+.glyphicon-home{
+	font-size:35px;
+	color:  purple;
+	font-color:  #B69BCA;
+}
+.wrapper{ height:2000px; width:100%; padding-top:20px}
+
+.fixed{
+	  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+}
+table tr, th {
+  text-align: center;
+}
+.center-table
+{
+  margin: 0 auto !important;
+  float: none !important;
+}
+p{
+  color: purple;
+  font-family:Century Gothic;
+  font-size: 36px; 
+  margin: 20px; 
+}
+a{
+  font-family: Century Gothic;
+   color:purple;
+   font-size:20px;
+}
+#info td{
+  font-family:Century Gothic;
+  color:purple;
+  align:right;
+  font-size:20px;
+  left:-95px;
+  position:relative;
+}
+</style>
+</head>
+<img src="/Docauto/Img/Sysminigletter.png" height="15%" width="15%" align="left"/>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<h1 style="text-align: center;">Consulta de Documentación Técnica</h1>
+<table id="info" align="right">
+   <tr>
+      <td>Usuario:</td>
+      <td th:text="${username}"></td>
+   </tr>
+</table>
+<br></br>
+<br></br>
+<body>
+<!-- con este divpanel se puede poner un encabezado  <div class="panel panel-info">
+	<div class="panel-heading">
+ 		<div  class="panel-title"><h1><img src="/Img/SVS.jpg" width="250px"/>&nbsp;&nbsp;Lista de Componentes</h1></div>
+ 	</div>
+</div>-->
+<!--<div class="panel-body">  -->
+	<br></br>
+ 	<br></br>
+ 	<h2 style="text-align: center;">Relación de Componentes</h2>
+ 	<br></br>
+ 	<br></br>
+ 	<br></br>
+ 	<br></br>
+
+    <table id="tablares" class="span5 center-table table-bordered table-striped" cellspacing="0" width="40%">
+       <thead>
+           <tr>
+				<th class="col-sm-2">Plataforma</th>
+				<th class="col-sm-2">Sistema</th>
+                <th class="col-sm-2">Biblioteca</th>
+                <th class="col-sm-2">Clase</th>
+                <th class="col-sm-2">Componente</th>
+                <th class="col-sm-16">Ver Componente</th>
+           </tr>                  
+       </thead>
+    	<tbody>
+		<tr th:each="componente : ${componentes}">
+	       	<td th:text="${componente.plataformaID}" WIDTH="30%" HEIGHT="50%">Plataforma</td>
+			<td th:text="${componente.sistemaID}" WIDTH="50" HEIGHT="50">Sistema</td>
+			<td th:text="${componente.bibliotecaId}" WIDTH="30%" HEIGHT="50%">Biblioteca</td>
+			<td th:text="${componente.claseId}" WIDTH="50" HEIGHT="50">Clase</td>
+			<td th:text="${componente.componente}" WIDTH="30%" HEIGHT="50%">Componente</td> 
+			<!-- <td> <h4><a th:href="@{/cmps/detalle/}+${componente.componente}" title="Ver Componente">VER COMPONENTE</a></h4>  </td>-->
+			<td> <h4><a th:href="@{/cmps/detalle/}+${componente.componente}" title="Ver Componente" class="glyphicon glyphicon-eye-open"></a></h4>  </td>
+	    </tr> 
+	 	</tbody>
+   	</table>
+<center> <a href="/" role="button" align="center">&nbsp;HOME<span class="glyphicon glyphicon-home"></span></a></center>
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+posicionarMenu();
+
+$(window).scroll(function() {    
+    posicionarMenu();
+});
+
+function posicionarMenu() {
+    var altura_del_header = $('.header').outerHeight(true);
+    var altura_del_menu = $('.menu').outerHeight(true);
+
+    if ($(window).scrollTop() >= altura_del_header){
+        $('.menu').addClass('fixed');
+        $('.wrapper').css('margin-top', (altura_del_menu) + 'px');
+    } else {
+        $('.menu').removeClass('fixed');
+        $('.wrapper').css('margin-top', '0');
+    }
+}	
+</script>-->
+<!-- lógica de lista ordenada -->
+<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script>
+$('#tablares').dataTable();
+</script>
+</body>
+</html>

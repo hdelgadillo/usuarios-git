@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="Img/icono.ico"/>
+    <title>Menú Administrativo de Usuarios</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	
+<style>
+.btn-lg,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+
+}
+.btn-success{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+left: 50px;
+ top: 50px;
+}
+img{
+	position:relative;
+	left:25px;
+}
+h1{
+	font-family: "Century Gothic", Times, serif;
+	font-style: normal;
+	font-size: 40 px;
+	color:purple;
+}
+th{
+	font-family: "Times New Roman", Times, serif;
+	font-style: normal;
+	font-size: 30px;
+}
+
+.glyphicon {
+    font-size: 20px;
+}
+a{
+color:purple;
+font-size:20px
+}
+
+</style>
+</head>  
+<h1 style="text-align: center;"><img src="Img/Sysminigletter.png" height="15%" width="15%" align="left"/>Administración de Usuarios</h1>
+<body>
+<br></br>
+<br></br>
+<br></br>
+<ul class="breadcrumb">
+	<li><a href="/nuevouser">Nuevo Usuario</a></li>
+  	<li><a href="/getusr">Visualizar Usuarios Registrados</a></li>
+  	<li><a href="/updateuser">Editar Usuario</a></li>
+  	<li><a href="/deleteUsuario">Eliminar Usuario</a></li>
+	<!-- <li><a href="/">Regresar</a></li>
+	<span class="glyphicon glyphicon-home"></span>-->
+	<li><a th:href="@{http://consultas-micro-service.192.168.42.195.nip.io/}" class="glyphicon glyphicon-home"></a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="shortcut icon" href="/Img/icono.ico"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <title>Componente</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>   
+<style>
+th{
+font-family: "Arial", Times, serif;
+font-style: normal;
+font-size: 10 px;
+text-align:center;
+}
+td {
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-family:"Arial";
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+
+.btn-lg,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-success:hover,
+.btn-success:active{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-primary{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+
+}
+.btn-success{
+	background-color: #B69BCA;
+    border-color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    align:50px;
+     position: relative;
+left: 50px;
+ top: 50px;
+}
+img{
+	position:relative;
+	left:25px;
+}
+h1{
+	font-family: "Century Gothic", Times, serif;
+	color: purple;
+}
+h2{
+	font-family: "Century Gothic", Times, serif;
+	color: purple;
+}
+.glyphicon {
+    font-size: 25px;
+    color:  purple;
+}
+.glyphicon-home{
+	font-size:30px;
+	color:  purple;
+	font-color: #B69BCA;
+}
+.wrapper{ height:2000px; width:100%; padding-top:20px}
+
+.fixed{
+	  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+}
+table tr, th {
+  text-align: center;
+  cell-spacing: 5 px;
+}
+.center-table
+{
+  margin: 0 auto !important;
+  float: none !important;
+}
+p{
+  color: purple;
+  font-family:Century Gothic;
+  font-size: 36px;  
+  margin: 20px;
+}
+a{
+   color:purple;
+   font-family:Century Gothic; 
+}
+#info td{
+   color:purple;
+   font-family:Century Gothic;
+   font-size:20px
+}
+</style>
+</head>
+<img src="/Img/Sysminigletter.png" height="15%" width="15%" align="left"/>
+<br></br>
+<br></br>
+<h1 style="text-align: center;">Consulta de Documentación Técnica</h1>
+<table id="info" align="right">
+   <tr>
+      <td>Usuario:</td>
+      <td th:text="${username}"></td>
+      </tr>
+</table>
+
+<body>
+<br></br>
+<br></br>
+<h2 style="text-align: center;">Productos del Componente</h2>
+<br></br>
+<div class="results-block" id="results-Block" style="text-align:center;">
+<br></br>
+	<table style="margin: 0 auto;"  id="tablacomp" class="span5 center-table table-bordered">
+		<thead>
+			<tr>
+				<th>Plataforma</th>
+				<th>Sistema</th>
+				<th>Biblioteca</th>
+				<th>Clase</th>
+				<th>Componente</th>
+			</tr>
+		</thead>
+		<tbody>
+	     	<tr>
+	       		<td th:text="${unico.plataformaID}"></td>
+				<td th:text="${unico.sistemaID}"></td>
+	            <td th:text="${unico.bibliotecaId}"></td>
+	            <td th:text="${unico.claseId}"></td>
+	            <td th:text="${unico.componente}"></td>
+	       	</tr>                  			
+	</tbody>
+</table>
+</div>
+<br></br>
+<br></br>
+<br></br>
+				<!-- TABLA DE DESCARGA DE DOCUMENTOS -->
+				
+<div class="results-block" id="results-Block">
+      <table style="margin: 0 auto;" id="tablares" class="span5 center-table table-bordered">
+  		<thead>
+          	<tr>
+          		<th>PRODUCTO</th>
+				<th>FORMATO</th>
+                <th>DESCARGAR DOCUMENTO</th>
+                <!--  <th>Descripción</th>-->
+          	</tr>
+         </thead>
+         <tbody>
+		<tr th:each="componente : ${detalle}">
+			<td th:text="${componente.descripcion}"></td>
+	       	<td th:text="${componente.formatoId}"></td>
+			<td> <h4><a th:href="@{'/cmps/detalle/'+${componente.plataformaID}+'/'+${componente.sistemaID}+'/'+${componente.claseId}+'/'+${componente.bibliotecaId}+'/'+${componente.componente}+'/'+${componente.productoId}+'/'+${componente.formatoId}+'/'}" title="Ver Componente" class="glyphicon glyphicon-save" target="_blank"></a></h4>  </td>
+        </tr>   
+	</tbody>
+  </table>
+</div>
+     <!--  <a href="/" role="button" class="glyphicon glyphicon-home"></a>-->
+<div class="menu"><a href="/" role="button">&nbsp;HOME<span class="glyphicon glyphicon-home"></span></a></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+posicionarMenu();
+
+$(window).scroll(function() {    
+    posicionarMenu();
+});
+
+function posicionarMenu() {
+    var altura_del_header = $('.header').outerHeight(true);
+    var altura_del_menu = $('.menu').outerHeight(true);
+
+    if ($(window).scrollTop() >= altura_del_header){
+        $('.menu').addClass('fixed');
+        $('.wrapper').css('margin-top', (altura_del_menu) + 'px');
+    } else {
+        $('.menu').removeClass('fixed');
+        $('.wrapper').css('margin-top', '0');
+    }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+server.port: 8082
+debug: true
+spring:
+  profiles.active: dev
+  
+  thymeleaf:
+    cache: false # Enable template caching.
+    check-template-location: true # Check that the templates location exists.
+    content-type: text/html # Content-Type value.
+    encoding: UTF-8 # Template encoding.
+    mode: HTML5 # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+  datasource:
+    platform: oracle
+    url: "jdbc:oracle:thin:@192.168.1.112:1521:orcl"
+    username: C##_DAPRESENTACIONES12
+    password: sysview12
+    driverClassName: "oracle.jdbc.driver.OracleDriver"
+    initialize: false
+  web:
+    rackup: foo.ru
+    session-timeout: 2 m
+
+#  datasource:
+#    platform: h2
+#    url: "jdbc:h2:file:${user.home}/SPRING_LOGIN;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=true"
+#    driverClassName: "org.h2.Driver"
+#    initialize: false
+    
+# LOGGING
+logging:
+  level: 
+    com.cube5: DEBUG # Log levels severity mapping. For instance `logging.level.org.springframework:DEBUG`
+    org.springframework.jdbc: DEBUG
+
+ 

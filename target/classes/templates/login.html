@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="Img/icono.ico"/>
+    <title>User Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="Img/icono.ico"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    
+<style>
+ .btn-primary,
+.btn-primary:hover,
+.btn-primary:active {
+        background-color: purple;
+        border-color: white;
+    }
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  bg-properties:fixed;
+}
+.form-signin {
+  max-width: 230px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 7px;
+  font-size: 24px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control{
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 8px;
+  font-size: 12px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+p{
+  color: purple;
+  font-family:Century Gothic;
+  font-size: 16px;  
+}
+h1{
+  color: purple;
+  font-family:Century Gothic;
+  font-size: 36px;  
+}
+</style>
+</head> 
+<img src="Img/Sysminigletter.png" height="15%" width="15%" align="left"/>
+<br></br>
+<br></br>
+<h1 style="text-align: center;">Consulta de Documentación Técnica</h1>
+
+<body>
+<br></br>
+<br></br>
+<br></br>
+    <div class="container">
+  		
+        <div th:if="${param.error}">
+                Invalid username or password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+    	
+        <form class="form-signin" th:action="@{/login}" method="post">
+        	
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" name="username" class="form-control" required="" placeholder="Usuario" autofocus="required" />
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" class="form-control" required="" placeholder="Contraseña" />
+          
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <!-- <p align="center"><img src="Img/mineria.jpg" height="10%" width="10%"/></p> -->
+    <p align="center">POWERED BY<img src="Img/LogoSysAlta.png" height="10%" width="10%"/></p>
+</body>
+</html>
